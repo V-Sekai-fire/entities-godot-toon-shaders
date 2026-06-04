@@ -13,9 +13,20 @@ The three shaders cover the overwhelming majority of avatars in the wild:
 
 > **Honest status:** only `mtoon/` is a complete, shipping Godot shader today (it
 > is V-Sekai's existing port). `liltoon/` and `scss/` ship an editor **inspector**
-> modeled on MToon's and an **initial shader exposing the core avatar-toon
-> parameters** — they are a foundation to iterate on, not full feature-parity
-> ports of lilToon's / SCSS's very large parameter sets.
+> modeled on MToon's, plus an **interim hand-written GDShader** exposing the core
+> avatar-toon parameters so the inspector + parameter map are usable now. These
+> `.gdshader` files are placeholders — see below.
+
+## Shader authoring: Lean 4 → Slang → GLSL
+
+The canonical shader definitions live in `lean/Shader/Toon/` (`MToon.lean`,
+`SCSS.lean`, `Math.lean`), copied from `V-Sekai/materialx-shaders-lean`. The
+intended pipeline is **Lean 4 spec → `LeanSlang.emit` → `.slang` → slangc →
+GLSL/`.gdshader`** (the same lean-shader-slang-gpu-glsl pipeline used elsewhere
+in V-Sekai). Those Lean specs are still **placeholder sketches to complete**; the
+hand-written `liltoon/*.gdshader` and `scss/*.gdshader` are interim stand-ins
+until the emission path replaces them. The editor inspectors are independent of
+how the shader is produced — they bind to the `ShaderMaterial`'s parameters.
 
 ## The two MToon variants
 
