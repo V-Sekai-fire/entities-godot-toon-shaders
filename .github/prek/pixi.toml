@@ -1,0 +1,11 @@
+[workspace]
+name = "prek-check"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-arm64"]
+
+[dependencies]
+prek = "*"
+
+[tasks.prek]
+cmd = "prek run --all-files --show-diff-on-failure --color always"
+cwd = "../.."
